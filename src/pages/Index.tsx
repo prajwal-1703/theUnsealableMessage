@@ -33,13 +33,13 @@ const Index = () => {
     const hash = window.location.hash;
     if (hash.startsWith("#data=")) {
       try {
-        const encoded = hash.substring(6);
-        const decoded = JSON.parse(atob(decodeURIComponent(encoded)));
+        const encoded = hash.replace("#data=", "");
+        const decoded = JSON.parse(atob(encoded));
         setMessageData(decoded);
         setView("receiver");
-      } catch (error) {
-        console.error("Failed to decode message:", error);
-        toast.error("Invalid message link");
+      } catch (e) {
+        console.error("Failed to decode message:", e);
+        toast.error("Invalid message link!");
       }
     }
   }, []);
@@ -82,8 +82,9 @@ const Index = () => {
       unsealDate: unsealDate,
     };
 
-    const encoded = encodeURIComponent(btoa(JSON.stringify(data)));
-    const link = `${window.location.origin}${window.location.pathname}#data=${encoded}`;
+    const encoded = btoa(JSON.stringify(data));
+    const base = window.location.href.split('#')[0];
+    const link = `${base}#data=${encoded}`;
     setGeneratedLink(link);
     toast.success("Link generated successfully!");
   };
