@@ -102,7 +102,3 @@ Deploy the generated `dist`/`build` folder to any static host (Vercel, Netlify, 
 ## Contributing
 
 Contributions are welcome. Please open issues or PRs for bug fixes and small improvements.
-
-## License
-
-Add your chosen license here (e.g., MIT).
